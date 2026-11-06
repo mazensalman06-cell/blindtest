@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blindify - Classic Mode</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b0b0b; color: #ffffff; margin: 0; padding: 40px; }
+        header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto 40px auto; }
+        .logo { font-size: 1.5em; font-weight: bold; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { color: #aaa; text-decoration: none; font-size: 0.95em; transition: color 0.2s; }
+        .nav-links a:hover { color: #fff; }
+        .xp-badge { background: #181818; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; font-weight: bold; color: #f1c40f; font-size: 0.9em; }
+
+        .main-container { max-width: 1000px; margin: 0 auto; }
+        .page-subtitle { color: #1db954; font-weight: bold; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; margin-bottom: 5px; }
+        h1 { font-size: 2.5em; margin: 0 0 10px 0; }
+        .description { color: #888; margin-bottom: 40px; }
+
+        .section-title { font-size: 1.2em; margin-bottom: 15px; color: #ddd; }
+        .playlist-box { background: #161616; border: 2px solid #1db954; border-radius: 12px; padding: 25px; width: 280px; margin-bottom: 40px; }
+        .playlist-box h3 { margin: 10px 0 5px 0; }
+        .playlist-box p { color: #888; font-size: 0.85em; margin: 0; }
+
+        .difficulty-options { display: flex; gap: 10px; margin-bottom: 40px; }
+        .diff-btn { background: #161616; border: 1px solid #333; color: #fff; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .diff-btn.active { background: #fff; color: #000; border-color: #fff; }
+
+        .btn-launch { background: #fff; color: #000; border: none; padding: 14px 30px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; transition: transform 0.2s; }
+        .btn-launch:hover { transform: scale(1.03); background: #eee; }
+
+        /* Zone de jeu active */
+        .game-card { background: #121212; border: 1px solid #222; border-radius: 16px; padding: 30px; margin-top: 30px; display: none; }
+        input { padding: 14px; margin: 10px 0; width: calc(100% - 28px); border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; font-size: 1em; }
+        .timer { color: #e74c3c; font-weight: bold; margin: 15px 0; }
+        #result-message { font-size: 1.1em; font-weight: bold; margin-top: 20px; white-space: pre-line; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">🎵 blindify</a>
+        <div class="nav-links">
+            <a href="/">← Accueil</a>
+            <a href="/battle">Battle mode</a>
+            <div class="xp-badge">⚡ <span id="exp-display">{{ exp }}</span> XP</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="page-subtitle">Mode Solo</div>
+        <h1>Classic <span style="color: #666;">Mode</span></h1>
+        <p class="description">Choisis ta playlist, lance l'extrait et devine le titre ou l'artiste.</p>
+
+        <div id="setup-section">
+            <div class="section-title">1. Choisis une playlist</div>
+            <div class="playlist-box">
+                <span style="font-size: 1.8em;">🎧</span>
+                <h3>Mix Local Principal</h3>
+                <p>Extraits aléatoires de ta sélection</p>
+            </div>
+
+            <div class="section-title">2. Difficulté</div>
+            <div class="difficulty-options">
+                <button class="diff-btn active" onclick="setDiff(this)">Easy</button>
+                <button class="diff-btn" onclick="setDiff(this)">Medium</button>
+                <button class="diff-btn" onclick="setDiff(this)">Hard</button>
+            </div>
+
+            <button class="btn-launch" id="play-btn">Lancer la partie →</button>
+        </div>
+
+        <!-- Zone interactive du jeu -->
+        <div class="game-card" id="game-card">
+            <audio id="audio-player"></audio>
+            <div id="timer-display" class="timer"></div>
+
+            <div id="guess-inputs" style="margin-top: 20px;">
+                <input type="text" id="guess-artist" placeholder="Nom de l'artiste" autocomplete="off">
+                <input type="text" id="guess-title" placeholder="Nom de la chanson" autocomplete="off">
+                <button class="btn-launch" id="submit-btn" style="width: 100%; margin-top: 15px;">Valider ma réponse</button>
+            </div>
+
+            <p id="result-message"></p>
+        </div>
+    </div>
+
+    <script>
+        let currentSongId = null;
+        let timerInterval = null;
+
+        function setDiff(btn) {
+            document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        document.getElementById('play-btn').addEventListener('click', async () => {
+            const response = await fetch('/api/random_song');
+            const data = await response.json();
+            
+            if (data.error) return alert(data.error);
+
+            currentSongId = data.id;
+            const audio = document.getElementById('audio-player');
+            audio.src = data.url;
+
+            audio.onloadedmetadata = () => {
+                const maxStart = Math.max(0, audio.duration - 30);
+                const randomStartTime = Math.random() * maxStart;
+                audio.currentTime = randomStartTime;
+                audio.play();
+
+                let timeLeft = 30;
+                document.getElementById('timer-display').innerText = `⏱️ Extrait en cours... (${timeLeft}s)`;
+                
+                clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    document.getElementById('timer-display').innerText = `⏱️ Extrait en cours... (${timeLeft}s)`;
+                    if (timeLeft <= 0 || audio.paused) {
+                        audio.pause();
+                        clearInterval(timerInterval);
+                        document.getElementById('timer-display').innerText = "⏹️ Extrait terminé ! À toi de répondre.";
+                    }
+                }, 1000);
+            };
+
+            document.getElementById('game-card').style.display = 'block';
+            document.getElementById('guess-inputs').style.display = 'block';
+            document.getElementById('result-message').innerText = '';
+            document.getElementById('guess-artist').value = '';
+            document.getElementById('guess-title').value = '';
+            document.getElementById('play-btn').innerText = "⏭️ Passer un autre extrait";
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', async () => {
+            const title = document.getElementById('guess-title').value;
+            const artist = document.getElementById('guess-artist').value;
+
+            if (!title || !artist) return;
+
+            clearInterval(timerInterval);
+            document.getElementById('timer-display').innerText = "";
+
+            const response = await fetch('/api/guess', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: currentSongId, title: title, artist: artist })
+            });
+
+            const result = await response.json();
+            const msgElement = document.getElementById('result-message');
+            msgElement.innerText = result.message;
+
+            if (result.correct) {
+                msgElement.style.color = "#1db954";
+                document.getElementById('exp-display').innerText = result.exp;
+            } else {
+                msgElement.style.color = "#e74c3c";
+            }
+
+            document.getElementById('guess-inputs').style.display = 'none';
+            document.getElementById('audio-player').pause();
+        });
+    </script>
+</body>
+</html>
