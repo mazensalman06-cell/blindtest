@@ -1,101 +1,44 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blindify - Accueil</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b0b0b; color: #ffffff; margin: 0; padding: 40px; }
-        header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto 40px auto; }
-        .logo { font-size: 1.5em; font-weight: bold; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { color: #aaa; text-decoration: none; font-size: 0.95em; transition: color 0.2s; }
-        .nav-links a:hover { color: #fff; }
-        .xp-badge { background: #181818; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; font-weight: bold; color: #f1c40f; font-size: 0.9em; }
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blindify — Accueil</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{color-scheme:dark;--bg:#0d0d0d;--panel:#171717;--panel2:#202020;--line:#303030;--text:#f5f5f5;--muted:#a1a1a1}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#242424 0,transparent 42%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0}
+.wrap{max-width:1120px;margin:auto;padding:28px 24px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px}.brand{font:700 25px 'Space Grotesk';letter-spacing:-1px}.brand span{color:#999}.nav{display:flex;gap:10px;align-items:center}.nav a,.pill{padding:10px 14px;border:1px solid var(--line);border-radius:30px;color:#ddd;font-size:13px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#aaa;font-weight:800;margin-bottom:16px}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(34px,6vw,58px)/1.04 'Space Grotesk';letter-spacing:-2px;margin-bottom:16px}h2{font:700 25px 'Space Grotesk'}h3{font:700 17px 'Space Grotesk'}p{color:var(--muted);line-height:1.65}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}.btn.ghost{background:transparent;border:1px solid #414141;color:#ddd}
+.panel,.card{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{min-height:190px;display:flex;flex-direction:column;align-items:flex-start;transition:.2s}.card:hover{border-color:#777;transform:translateY(-3px)}.icon{width:46px;height:46px;border-radius:13px;background:#292929;display:grid;place-items:center;font-size:22px;margin-bottom:20px}.card p{font-size:13px;margin-bottom:0}.arrow{margin-top:auto;padding-top:16px;color:#ddd}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-bottom:58px}.hero-copy{padding:25px 0}.hero-art{min-height:280px;border:1px solid #3a3a3a;border-radius:24px;background:radial-gradient(circle,#393939,#171717 68%);display:grid;place-items:center;position:relative;overflow:hidden}.disc{width:175px;height:175px;border-radius:50%;background:repeating-radial-gradient(circle,#171717 0 3px,#3b3b3b 4px 5px);border:7px solid #111;display:grid;place-items:center;animation:spin 14s linear infinite}.disc span{width:55px;height:55px;border-radius:50%;background:#eee;color:#111;display:grid;place-items:center;font-size:22px}@keyframes spin{to{transform:rotate(360deg)}}.float{position:absolute;background:#191919;border:1px solid #454545;border-radius:12px;padding:10px 13px;font-size:11px;font-weight:800}.float.one{top:22px;left:22px}.float.two{right:20px;bottom:24px}
+.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.playlist{padding:17px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer}.playlist:hover,.playlist.selected{border-color:#aaa;background:#242424}.playlist .emoji{font-size:27px;margin-bottom:12px}.playlist p{font-size:11px;margin:5px 0 0}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.input{width:100%;background:#101010;border:1px solid #393939;border-radius:12px;color:white;padding:15px;outline:none}.input:focus{border-color:#aaa}.muted{color:var(--muted);font-size:12px}.game-layout{display:grid;grid-template-columns:1fr 260px;gap:17px}.audio{min-height:205px;border:1px solid #454545;border-radius:17px;background:radial-gradient(ellipse,#343434,#1a1a1a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:20px 0}.play{width:58px;height:58px;border-radius:50%;background:#f1f1f1;color:#111;font-size:20px}.wave{letter-spacing:5px;color:#ddd;margin:15px 0 7px}.stats div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}.feedback{padding:12px;border:1px solid #555;border-radius:11px;margin-top:12px;display:none;font-size:13px}.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.room{text-align:center;padding:28px}.code{font:700 34px 'Space Grotesk';letter-spacing:8px;padding:18px;margin:15px auto;background:#242424;border:1px dashed #777;border-radius:13px;max-width:280px}
+footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#777;font-size:11px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.playlist-grid{grid-template-columns:repeat(2,1fr)}.game-layout,.room-grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
+</style></head><body>
+<div class="wrap">
 
-        .main-container { max-width: 1000px; margin: 0 auto; }
-        .hero { display: flex; justify-content: space-between; align-items: center; background: #121212; border: 1px solid #222; border-radius: 16px; padding: 40px; margin-bottom: 50px; }
-        .hero-text h1 { font-size: 2.8em; margin: 0 0 15px 0; line-height: 1.1; }
-        .hero-text p { color: #888; font-size: 1.1em; margin-bottom: 25px; }
-        .btn-primary { background: #fff; color: #000; padding: 12px 24px; border-radius: 30px; font-weight: bold; text-decoration: none; display: inline-block; transition: transform 0.2s; }
-        .btn-primary:hover { transform: scale(1.05); background: #eee; }
-        
-        .vinyl-card { background: #181818; border: 1px solid #333; padding: 25px; border-radius: 12px; text-align: center; width: 220px; }
-        .vinyl { width: 100px; height: 100px; background: #000; border-radius: 50%; margin: 0 auto 15px auto; border: 8px solid #222; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+<header class="top"><a class="brand" href="index.html">♫ blind<span>ify</span></a><nav class="nav"><a href="classic.html">Mode solo</a><a href="battle.html">Multijoueur</a><span class="pill">✦ 2 450 XP</span></nav></header>
+<section class="hero">
+ <div class="hero-copy"><div class="eyebrow">YOUR MUSIC. YOUR CHALLENGE.</div><h1>Tu connais vraiment<br>ta musique&nbsp;?</h1>
+ <p>Écoute un extrait, devine le titre ou l’artiste et gagne de l’expérience. Choisis ton mode et lance le défi.</p>
+ <div class="row"><a class="btn" href="classic.html">Commencer à jouer →</a><a class="btn secondary" href="battle.html">Défier un ami</a></div></div>
+ <div class="hero-art"><div class="float one">♫ FEEL THE BEAT</div><div class="disc"><span>♫</span></div><div class="float two">+ XP À CHAQUE BONNE RÉPONSE</div></div>
+</section>
+<div class="section"><div class="eyebrow">CHOISIS TON EXPÉRIENCE</div><h2>Quel mode veux-tu jouer&nbsp;?</h2></div>
+<section class="grid">
+ <a class="card" href="classic.html"><div class="icon">♫</div><h3>Classic Mode</h3><p>Joue en solo, choisis une playlist et retrouve le titre et l’artiste.</p><span class="arrow">Jouer en solo →</span></a>
+ <a class="card" href="classic.html?mode=speed"><div class="icon">◷</div><h3>Speed Challenge</h3><p>Réponds le plus vite possible pour maximiser tes points d’XP.</p><span class="arrow">Lancer le chrono →</span></a>
+ <a class="card" href="battle.html"><div class="icon">⚔</div><h3>Battle Mode</h3><p>Affronte un autre joueur sur deux appareils avec les mêmes extraits.</p><span class="arrow">Créer une partie →</span></a>
+</section>
+<div class="section"><h2>Des playlists à découvrir</h2><p>Des sélections prêtes à jouer : pas besoin de créer ta propre playlist.</p></div>
+<section class="playlist-grid">
+ <div class="playlist"><div class="emoji">🎤</div><b>Rap & Hip-hop</b><p>Classiques et nouveautés</p></div>
+ <div class="playlist"><div class="emoji">💿</div><b>Années 2000</b><p>Les hits incontournables</p></div>
+ <div class="playlist"><div class="emoji">🌍</div><b>Afrobeats</b><p>Les sons qui font danser</p></div>
+ <div class="playlist"><div class="emoji">🎧</div><b>Pop Hits</b><p>Les tubes internationaux</p></div>
+</section>
+<footer>BLINDIFY · Blind test musical · Interface prototype</footer>
 
-        .section-title { font-size: 1.4em; margin-bottom: 20px; }
-        .modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 50px; }
-        .mode-card { background: #121212; border: 1px solid #222; border-radius: 12px; padding: 25px; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
-        .mode-card:hover { border-color: #555; transform: translateY(-3px); }
-        .mode-card h3 { margin: 15px 0 10px 0; font-size: 1.2em; }
-        .mode-card p { color: #888; font-size: 0.9em; margin: 0 0 20px 0; }
-        .mode-link { color: #1db954; font-weight: bold; font-size: 0.9em; }
-
-        .playlist-card { background: #121212; border: 2px solid #1db954; border-radius: 12px; padding: 20px 25px; display: flex; align-items: center; gap: 20px; }
-        .playlist-icon { font-size: 2em; background: #1a2e1e; padding: 15px; border-radius: 10px; }
-    </style>
-</head>
-<body>
-    <header>
-        <a href="/" class="logo">🎵 blindify</a>
-        <div class="nav-links">
-            <a href="/classic">Mode solo</a>
-            <a href="/battle">Multijoueur</a>
-            <div class="xp-badge">⚡ {{ exp }} XP</div>
-        </div>
-    </header>
-
-    <div class="main-container">
-        <div class="hero">
-            <div class="hero-text">
-                <small style="color: #1db954; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Your music. Your challenge.</small>
-                <h1>Tu connais vraiment<br>ta musique ?</h1>
-                <p>Écoute un extrait, devine le titre ou l'artiste et gagne de l'expérience. Choisis ton mode et lance le défi.</p>
-                <a href="/classic" class="btn-primary">Commencer à jouer →</a>
-            </div>
-            <div class="vinyl-card">
-                <div class="vinyl">💿</div>
-                <small style="color: #888;">FEEL THE BEAT</small>
-                <p style="margin: 5px 0 0 0; font-size: 0.85em; color: #f1c40f;">+10 XP à chaque bonne réponse</p>
-            </div>
-        </div>
-
-        <h2 class="section-title">Quel mode veux-tu jouer ?</h2>
-        <div class="modes-grid">
-            <a href="/classic" class="mode-card">
-                <div>
-                    <span style="font-size: 1.5em;">🎵</span>
-                    <h3>Classic Mode</h3>
-                    <p>Joue en solo, choisis une playlist et retrouve le titre et l'artiste.</p>
-                </div>
-                <span class="mode-link">Jouer en solo →</span>
-            </a>
-            <a href="/battle" class="mode-card" style="opacity: 0.5; pointer-events: none;">
-                <div>
-                    <span style="font-size: 1.5em;">⚡</span>
-                    <h3>Speed Challenge</h3>
-                    <p>Réponds le plus vite possible pour maximiser tes points d'XP.</p>
-                </div>
-                <span class="mode-link">Bientôt disponible</span>
-            </a>
-            <a href="/battle" class="mode-card">
-                <div>
-                    <span style="font-size: 1.5em;">⚔️</span>
-                    <h3>Battle Mode</h3>
-                    <p>Affronte un autre joueur sur deux appareils avec les mêmes extraits.</p>
-                </div>
-                <span class="mode-link">Créer une partie →</span>
-            </a>
-        </div>
-
-        <h2 class="section-title">Ta Playlist Active</h2>
-        <div class="playlist-card">
-            <div class="playlist-icon">🎧</div>
-            <div>
-                <h3 style="margin: 0 0 5px 0;">Ma Playlist Personnalisée (Dossier Local)</h3>
-                <p style="color: #888; margin: 0; font-size: 0.9em;">Extraits aléatoires de 30 secondes prêts pour le blind test.</p>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+</div>
+<script></script>
+</body></html>

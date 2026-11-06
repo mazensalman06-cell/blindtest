@@ -1,167 +1,77 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blindify - Classic Mode</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b0b0b; color: #ffffff; margin: 0; padding: 40px; }
-        header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto 40px auto; }
-        .logo { font-size: 1.5em; font-weight: bold; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { color: #aaa; text-decoration: none; font-size: 0.95em; transition: color 0.2s; }
-        .nav-links a:hover { color: #fff; }
-        .xp-badge { background: #181818; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; font-weight: bold; color: #f1c40f; font-size: 0.9em; }
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blindify — Classic Mode</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{color-scheme:dark;--bg:#0d0d0d;--panel:#171717;--panel2:#202020;--line:#303030;--text:#f5f5f5;--muted:#a1a1a1}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#242424 0,transparent 42%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0}
+.wrap{max-width:1120px;margin:auto;padding:28px 24px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px}.brand{font:700 25px 'Space Grotesk';letter-spacing:-1px}.brand span{color:#999}.nav{display:flex;gap:10px;align-items:center}.nav a,.pill{padding:10px 14px;border:1px solid var(--line);border-radius:30px;color:#ddd;font-size:13px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#aaa;font-weight:800;margin-bottom:16px}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(34px,6vw,58px)/1.04 'Space Grotesk';letter-spacing:-2px;margin-bottom:16px}h2{font:700 25px 'Space Grotesk'}h3{font:700 17px 'Space Grotesk'}p{color:var(--muted);line-height:1.65}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}.btn.ghost{background:transparent;border:1px solid #414141;color:#ddd}
+.panel,.card{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{min-height:190px;display:flex;flex-direction:column;align-items:flex-start;transition:.2s}.card:hover{border-color:#777;transform:translateY(-3px)}.icon{width:46px;height:46px;border-radius:13px;background:#292929;display:grid;place-items:center;font-size:22px;margin-bottom:20px}.card p{font-size:13px;margin-bottom:0}.arrow{margin-top:auto;padding-top:16px;color:#ddd}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-bottom:58px}.hero-copy{padding:25px 0}.hero-art{min-height:280px;border:1px solid #3a3a3a;border-radius:24px;background:radial-gradient(circle,#393939,#171717 68%);display:grid;place-items:center;position:relative;overflow:hidden}.disc{width:175px;height:175px;border-radius:50%;background:repeating-radial-gradient(circle,#171717 0 3px,#3b3b3b 4px 5px);border:7px solid #111;display:grid;place-items:center;animation:spin 14s linear infinite}.disc span{width:55px;height:55px;border-radius:50%;background:#eee;color:#111;display:grid;place-items:center;font-size:22px}@keyframes spin{to{transform:rotate(360deg)}}.float{position:absolute;background:#191919;border:1px solid #454545;border-radius:12px;padding:10px 13px;font-size:11px;font-weight:800}.float.one{top:22px;left:22px}.float.two{right:20px;bottom:24px}
+.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.playlist{padding:17px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer}.playlist:hover,.playlist.selected{border-color:#aaa;background:#242424}.playlist .emoji{font-size:27px;margin-bottom:12px}.playlist p{font-size:11px;margin:5px 0 0}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.input{width:100%;background:#101010;border:1px solid #393939;border-radius:12px;color:white;padding:15px;outline:none}.input:focus{border-color:#aaa}.muted{color:var(--muted);font-size:12px}.game-layout{display:grid;grid-template-columns:1fr 260px;gap:17px}.audio{min-height:205px;border:1px solid #454545;border-radius:17px;background:radial-gradient(ellipse,#343434,#1a1a1a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:20px 0}.play{width:58px;height:58px;border-radius:50%;background:#f1f1f1;color:#111;font-size:20px}.wave{letter-spacing:5px;color:#ddd;margin:15px 0 7px}.stats div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}.feedback{padding:12px;border:1px solid #555;border-radius:11px;margin-top:12px;display:none;font-size:13px}.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.room{text-align:center;padding:28px}.code{font:700 34px 'Space Grotesk';letter-spacing:8px;padding:18px;margin:15px auto;background:#242424;border:1px dashed #777;border-radius:13px;max-width:280px}
+footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#777;font-size:11px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.playlist-grid{grid-template-columns:repeat(2,1fr)}.game-layout,.room-grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
+</style></head><body>
+<div class="wrap">
 
-        .main-container { max-width: 1000px; margin: 0 auto; }
-        .page-subtitle { color: #1db954; font-weight: bold; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; margin-bottom: 5px; }
-        h1 { font-size: 2.5em; margin: 0 0 10px 0; }
-        .description { color: #888; margin-bottom: 40px; }
+<header class="top"><a class="brand" href="index.html">♫ blind<span>ify</span></a><nav class="nav"><a href="index.html">← Accueil</a><a href="battle.html">Battle mode</a><span class="pill">✦ <b id="totalXp">2 450</b> XP</span></nav></header>
+<div class="eyebrow">MODE SOLO</div><h1>Classic <span style="color:#aaa">Mode</span></h1><p>Choisis ta playlist et ta difficulté. Une seule case pour proposer le titre ou l’artiste, dans l’ordre que tu veux.</p>
+<section id="setup">
+ <div class="section"><h2>1. Choisis une playlist</h2></div>
+ <div class="playlist-grid" id="playlists">
+  <div class="playlist selected" data-name="Rap & Hip-hop"><div class="emoji">🎤</div><b>Rap & Hip-hop</b><p>Classiques et nouveautés</p></div>
+  <div class="playlist" data-name="Années 2000"><div class="emoji">💿</div><b>Années 2000</b><p>Les hits incontournables</p></div>
+  <div class="playlist" data-name="Afrobeats"><div class="emoji">🌍</div><b>Afrobeats</b><p>Les sons qui font danser</p></div>
+  <div class="playlist" data-name="Pop Hits"><div class="emoji">🎧</div><b>Pop Hits</b><p>Les tubes internationaux</p></div>
+ </div>
+ <div class="section"><h2>2. Difficulté</h2></div>
+ <div class="row" id="difficulty"><button class="btn secondary selected" data-level="Easy">Easy</button><button class="btn secondary" data-level="Medium">Medium</button><button class="btn secondary" data-level="Hard">Hard</button></div>
+ <div class="section row"><button class="btn" id="start">Lancer la partie →</button><span class="muted">10 chansons · 20 secondes par extrait</span></div>
+</section>
+<section id="game" hidden>
+ <div class="row" style="justify-content:space-between"><div><div class="eyebrow" id="modeLabel">CLASSIC MODE</div><h2>Question <span id="q">1</span> / 10</h2></div><h2 id="timer">00:20</h2></div>
+ <div class="game-layout"><div class="panel">
+  <div class="audio"><button class="play" id="play">▶</button><div class="wave">▂ ▅ ▃ ▇ ▄ ▆ ▂ ▅ ▇ ▃</div><div class="muted">ZONE AUDIO · LECTURE À CONNECTER</div></div>
+  <label for="answer">Écris le titre OU le nom de l’artiste</label><input class="input" id="answer" placeholder="Ta réponse..." autocomplete="off">
+  <div class="row" style="margin-top:12px"><button class="btn" id="validate">Valider ma réponse</button><button class="btn secondary" id="skip">I DON'T KNOW</button></div>
+  <div class="feedback" id="feedback"></div>
+  <p class="muted" style="margin-top:12px">Trouve les deux informations pour compléter la chanson. Tu peux commencer par le titre ou par l’artiste.</p>
+ </div><aside class="panel stats"><h3>Ta progression</h3><div><span>XP de la partie</span><b id="xp">0</b></div><div><span>Chansons complétées</span><b id="correct">0 / 10</b></div><div><span>Playlist</span><b id="chosen">Rap & Hip-hop</b></div><div><span>Streak</span><b id="streak">0</b></div></aside></div>
+</section>
+<section id="reveal" class="panel" hidden style="margin-top:20px;text-align:center"><div class="eyebrow">RÉPONSE</div><h2 id="answerTitle">Titre</h2><p id="answerArtist">Artiste</p><p class="muted">Aucun XP attribué pour une chanson passée.</p><button class="btn" id="next">Chanson suivante →</button></section>
+<section id="results" class="panel" hidden style="margin-top:20px;text-align:center"><div class="eyebrow">PARTIE TERMINÉE</div><h2>Bien joué !</h2><h1 id="finalXp">+0 XP</h1><p id="finalText"></p><a class="btn" href="classic.html">Rejouer</a><a class="btn secondary" href="index.html">Accueil</a></section>
+<footer>BLINDIFY · Mode solo · Prototype sans lecture audio réelle</footer>
 
-        .section-title { font-size: 1.2em; margin-bottom: 15px; color: #ddd; }
-        .playlist-box { background: #161616; border: 2px solid #1db954; border-radius: 12px; padding: 25px; width: 280px; margin-bottom: 40px; }
-        .playlist-box h3 { margin: 10px 0 5px 0; }
-        .playlist-box p { color: #888; font-size: 0.85em; margin: 0; }
-
-        .difficulty-options { display: flex; gap: 10px; margin-bottom: 40px; }
-        .diff-btn { background: #161616; border: 1px solid #333; color: #fff; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .diff-btn.active { background: #fff; color: #000; border-color: #fff; }
-
-        .btn-launch { background: #fff; color: #000; border: none; padding: 14px 30px; border-radius: 30px; font-weight: bold; font-size: 1em; cursor: pointer; transition: transform 0.2s; }
-        .btn-launch:hover { transform: scale(1.03); background: #eee; }
-
-        /* Zone de jeu active */
-        .game-card { background: #121212; border: 1px solid #222; border-radius: 16px; padding: 30px; margin-top: 30px; display: none; }
-        input { padding: 14px; margin: 10px 0; width: calc(100% - 28px); border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; font-size: 1em; }
-        .timer { color: #e74c3c; font-weight: bold; margin: 15px 0; }
-        #result-message { font-size: 1.1em; font-weight: bold; margin-top: 20px; white-space: pre-line; }
-    </style>
-</head>
-<body>
-    <header>
-        <a href="/" class="logo">🎵 blindify</a>
-        <div class="nav-links">
-            <a href="/">← Accueil</a>
-            <a href="/battle">Battle mode</a>
-            <div class="xp-badge">⚡ <span id="exp-display">{{ exp }}</span> XP</div>
-        </div>
-    </header>
-
-    <div class="main-container">
-        <div class="page-subtitle">Mode Solo</div>
-        <h1>Classic <span style="color: #666;">Mode</span></h1>
-        <p class="description">Choisis ta playlist, lance l'extrait et devine le titre ou l'artiste.</p>
-
-        <div id="setup-section">
-            <div class="section-title">1. Choisis une playlist</div>
-            <div class="playlist-box">
-                <span style="font-size: 1.8em;">🎧</span>
-                <h3>Mix Local Principal</h3>
-                <p>Extraits aléatoires de ta sélection</p>
-            </div>
-
-            <div class="section-title">2. Difficulté</div>
-            <div class="difficulty-options">
-                <button class="diff-btn active" onclick="setDiff(this)">Easy</button>
-                <button class="diff-btn" onclick="setDiff(this)">Medium</button>
-                <button class="diff-btn" onclick="setDiff(this)">Hard</button>
-            </div>
-
-            <button class="btn-launch" id="play-btn">Lancer la partie →</button>
-        </div>
-
-        <!-- Zone interactive du jeu -->
-        <div class="game-card" id="game-card">
-            <audio id="audio-player"></audio>
-            <div id="timer-display" class="timer"></div>
-
-            <div id="guess-inputs" style="margin-top: 20px;">
-                <input type="text" id="guess-artist" placeholder="Nom de l'artiste" autocomplete="off">
-                <input type="text" id="guess-title" placeholder="Nom de la chanson" autocomplete="off">
-                <button class="btn-launch" id="submit-btn" style="width: 100%; margin-top: 15px;">Valider ma réponse</button>
-            </div>
-
-            <p id="result-message"></p>
-        </div>
-    </div>
-
-    <script>
-        let currentSongId = null;
-        let timerInterval = null;
-
-        function setDiff(btn) {
-            document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-
-        document.getElementById('play-btn').addEventListener('click', async () => {
-            const response = await fetch('/api/random_song');
-            const data = await response.json();
-            
-            if (data.error) return alert(data.error);
-
-            currentSongId = data.id;
-            const audio = document.getElementById('audio-player');
-            audio.src = data.url;
-
-            audio.onloadedmetadata = () => {
-                const maxStart = Math.max(0, audio.duration - 30);
-                const randomStartTime = Math.random() * maxStart;
-                audio.currentTime = randomStartTime;
-                audio.play();
-
-                let timeLeft = 30;
-                document.getElementById('timer-display').innerText = `⏱️ Extrait en cours... (${timeLeft}s)`;
-                
-                clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    timeLeft--;
-                    document.getElementById('timer-display').innerText = `⏱️ Extrait en cours... (${timeLeft}s)`;
-                    if (timeLeft <= 0 || audio.paused) {
-                        audio.pause();
-                        clearInterval(timerInterval);
-                        document.getElementById('timer-display').innerText = "⏹️ Extrait terminé ! À toi de répondre.";
-                    }
-                }, 1000);
-            };
-
-            document.getElementById('game-card').style.display = 'block';
-            document.getElementById('guess-inputs').style.display = 'block';
-            document.getElementById('result-message').innerText = '';
-            document.getElementById('guess-artist').value = '';
-            document.getElementById('guess-title').value = '';
-            document.getElementById('play-btn').innerText = "⏭️ Passer un autre extrait";
-        });
-
-        document.getElementById('submit-btn').addEventListener('click', async () => {
-            const title = document.getElementById('guess-title').value;
-            const artist = document.getElementById('guess-artist').value;
-
-            if (!title || !artist) return;
-
-            clearInterval(timerInterval);
-            document.getElementById('timer-display').innerText = "";
-
-            const response = await fetch('/api/guess', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: currentSongId, title: title, artist: artist })
-            });
-
-            const result = await response.json();
-            const msgElement = document.getElementById('result-message');
-            msgElement.innerText = result.message;
-
-            if (result.correct) {
-                msgElement.style.color = "#1db954";
-                document.getElementById('exp-display').innerText = result.exp;
-            } else {
-                msgElement.style.color = "#e74c3c";
-            }
-
-            document.getElementById('guess-inputs').style.display = 'none';
-            document.getElementById('audio-player').pause();
-        });
-    </script>
-</body>
-</html>
+</div>
+<script>
+const songs=[
+ {title:"Blinding Lights",artist:"The Weeknd"},
+ {title:"Lose Yourself",artist:"Eminem"},
+ {title:"One Dance",artist:"Drake"},
+ {title:"Shape of You",artist:"Ed Sheeran"},
+ {title:"Djadja",artist:"Aya Nakamura"},
+ {title:"Calm Down",artist:"Rema"},
+ {title:"Bad Romance",artist:"Lady Gaga"},
+ {title:"God's Plan",artist:"Drake"},
+ {title:"HUMBLE.",artist:"Kendrick Lamar"},
+ {title:"Dernière danse",artist:"Indila"}
+];
+let playlist="Rap & Hip-hop",level="Easy",i=0,xp=0,done=0,streak=0,foundTitle=false,foundArtist=false,time=20,clock=null,skipped=false;
+const $=id=>document.getElementById(id);
+document.querySelectorAll(".playlist").forEach(el=>el.addEventListener("click",()=>{document.querySelectorAll(".playlist").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");playlist=el.dataset.name;}));
+document.querySelectorAll("#difficulty button").forEach(el=>el.addEventListener("click",()=>{document.querySelectorAll("#difficulty button").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");level=el.dataset.level;}));
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g,"").trim()}
+function start(){ $("setup").hidden=true;$("game").hidden=false;$("chosen").textContent=playlist;$("modeLabel").textContent=playlist.toUpperCase()+" · "+level.toUpperCase();load()}
+function load(){if(i>=10){finish();return}foundTitle=false;foundArtist=false;skipped=false;time=20;$("q").textContent=i+1;$("timer").textContent="00:20";$("answer").value="";$("answer").disabled=false;$("feedback").style.display="none";$("feedback").textContent="";$("xp").textContent=xp;$("correct").textContent=done+" / 10";$("streak").textContent=streak;clearInterval(clock);clock=setInterval(()=>{time--;$("timer").textContent="00:"+String(Math.max(0,time)).padStart(2,"0");if(time<=0)reveal(true)},1000)}
+function validate(){let v=norm($("answer").value);if(!v)return;let s=songs[i],isT=norm(s.title)===v,isA=norm(s.artist)===v;if((isT&&!foundTitle)||(isA&&!foundArtist)){let pts=level==="Easy"?50:level==="Medium"?75:100;xp+=pts;streak++;if(isT)foundTitle=true;else foundArtist=true;$("feedback").textContent=(isT?"Titre":"Artiste")+" trouvé ! +"+pts+" XP. "+(foundTitle&&!foundArtist?"Trouve maintenant l’artiste.":"Trouve maintenant le titre.");$("feedback").style.display="block";$("answer").value="";if(foundTitle&&foundArtist){xp+=25;done++;$("feedback").textContent+=" Bonus duo : +25 XP !";$("answer").disabled=true;clearInterval(clock);setTimeout(next,1100)}$("xp").textContent=xp;$("streak").textContent=streak;$("correct").textContent=done+" / 10"}else{$("feedback").textContent="Pas tout à fait. Réessaie !";$("feedback").style.display="block";streak=0;$("streak").textContent=0}}
+function reveal(timeout=false){clearInterval(clock);let s=songs[i];$("answerTitle").textContent=s.title;$("answerArtist").textContent=s.artist;$("game").hidden=true;$("reveal").hidden=false}
+function next(){$("reveal").hidden=true;$("game").hidden=false;i++;load()}
+function finish(){clearInterval(clock);$("game").hidden=true;$("results").hidden=false;$("finalXp").textContent="+"+xp+" XP";$("finalText").textContent=done+" chansons complétées sur 10 · Playlist : "+playlist}
+$("start").onclick=start;$("validate").onclick=validate;$("answer").addEventListener("keydown",e=>{if(e.key==="Enter")validate()});$("skip").onclick=()=>reveal();$("next").onclick=next;
+$("play").onclick=()=>alert("La lecture audio sera disponible après connexion d'une source musicale.");
+if(new URLSearchParams(location.search).get("mode")==="speed"){$("modeLabel").textContent="SPEED CHALLENGE";}
+</script>
+</body></html>
