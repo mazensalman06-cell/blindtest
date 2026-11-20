@@ -7,37 +7,299 @@
 a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0}
 .wrap{max-width:1120px;margin:auto;padding:28px 24px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px}.brand{font:700 25px 'Space Grotesk';letter-spacing:-1px}.brand span{color:#999}.nav{display:flex;gap:10px;align-items:center}.nav a,.pill{padding:10px 14px;border:1px solid var(--line);border-radius:30px;color:#ddd;font-size:13px}
 .eyebrow{font-size:11px;letter-spacing:2px;color:#aaa;font-weight:800;margin-bottom:16px}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(34px,6vw,58px)/1.04 'Space Grotesk';letter-spacing:-2px;margin-bottom:16px}h2{font:700 25px 'Space Grotesk'}h3{font:700 17px 'Space Grotesk'}p{color:var(--muted);line-height:1.65}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}.btn.ghost{background:transparent;border:1px solid #414141;color:#ddd}
-.panel,.card{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{min-height:190px;display:flex;flex-direction:column;align-items:flex-start;transition:.2s}.card:hover{border-color:#777;transform:translateY(-3px)}.icon{width:46px;height:46px;border-radius:13px;background:#292929;display:grid;place-items:center;font-size:22px;margin-bottom:20px}.card p{font-size:13px;margin-bottom:0}.arrow{margin-top:auto;padding-top:16px;color:#ddd}
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-bottom:58px}.hero-copy{padding:25px 0}.hero-art{min-height:280px;border:1px solid #3a3a3a;border-radius:24px;background:radial-gradient(circle,#393939,#171717 68%);display:grid;place-items:center;position:relative;overflow:hidden}.disc{width:175px;height:175px;border-radius:50%;background:repeating-radial-gradient(circle,#171717 0 3px,#3b3b3b 4px 5px);border:7px solid #111;display:grid;place-items:center;animation:spin 14s linear infinite}.disc span{width:55px;height:55px;border-radius:50%;background:#eee;color:#111;display:grid;place-items:center;font-size:22px}@keyframes spin{to{transform:rotate(360deg)}}.float{position:absolute;background:#191919;border:1px solid #454545;border-radius:12px;padding:10px 13px;font-size:11px;font-weight:800}.float.one{top:22px;left:22px}.float.two{right:20px;bottom:24px}
-.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.playlist{padding:17px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer}.playlist:hover,.playlist.selected{border-color:#aaa;background:#242424}.playlist .emoji{font-size:27px;margin-bottom:12px}.playlist p{font-size:11px;margin:5px 0 0}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.input{width:100%;background:#101010;border:1px solid #393939;border-radius:12px;color:white;padding:15px;outline:none}.input:focus{border-color:#aaa}.muted{color:var(--muted);font-size:12px}.game-layout{display:grid;grid-template-columns:1fr 260px;gap:17px}.audio{min-height:205px;border:1px solid #454545;border-radius:17px;background:radial-gradient(ellipse,#343434,#1a1a1a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:20px 0}.play{width:58px;height:58px;border-radius:50%;background:#f1f1f1;color:#111;font-size:20px}.wave{letter-spacing:5px;color:#ddd;margin:15px 0 7px}.stats div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}.feedback{padding:12px;border:1px solid #555;border-radius:11px;margin-top:12px;display:none;font-size:13px}.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.room{text-align:center;padding:28px}.code{font:700 34px 'Space Grotesk';letter-spacing:8px;padding:18px;margin:15px auto;background:#242424;border:1px dashed #777;border-radius:13px;max-width:280px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}
+.panel{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.icon{width:46px;height:46px;border-radius:13px;background:#292929;display:grid;place-items:center;font-size:22px;margin-bottom:20px}
+.section{margin:30px 0 18px}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.input{width:100%;background:#101010;border:1px solid #393939;border-radius:12px;color:white;padding:15px;outline:none}.input:focus{border-color:#aaa}.muted{color:var(--muted);font-size:12px}
+.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.room{text-align:center;padding:28px}.code{font:700 34px 'Space Grotesk';letter-spacing:8px;padding:18px;margin:15px auto;background:#242424;border:1px dashed #777;border-radius:13px;max-width:280px}
+.game-layout{display:grid;grid-template-columns:1fr 270px;gap:17px}.audio{min-height:190px;border:1px solid #454545;border-radius:17px;background:radial-gradient(ellipse,#343434,#1a1a1a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:16px 0}.play{width:58px;height:58px;border-radius:50%;background:#f1f1f1;color:#111;font-size:20px}.wave{letter-spacing:5px;color:#ddd;margin:15px 0 7px}.stats div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}.feedback{padding:12px;border:1px solid #555;border-radius:11px;margin-top:12px;display:none;font-size:13px}
+.badges{display:flex;gap:8px;margin-top:12px}.badge{padding:6px 12px;border-radius:20px;font-size:12px;background:#222;border:1px solid #3a3a3a;color:#888}.badge.ok{background:#1b3322;border-color:#2ecc71;color:#2ecc71;font-weight:700}
 footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#777;font-size:11px}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.playlist-grid{grid-template-columns:repeat(2,1fr)}.game-layout,.room-grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
-</style></head><body>
+@media(max-width:760px){.grid,.game-layout,.room-grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
+</head><body>
 <div class="wrap">
 
-<header class="top"><a class="brand" href="index.html">♫ blind<span>ify</span></a><nav class="nav"><a href="index.html">← Accueil</a><a href="classic.html">Mode solo</a><span class="pill">⚔ Battle mode</span></nav></header>
+<header class="top"><a class="brand" href="/">♫ blind<span>ify</span></a><nav class="nav"><a href="/">← Accueil</a><a href="/classic">Mode solo</a><span class="pill">⚔ Battle mode</span></nav></header>
 <div class="eyebrow">REAL-TIME MULTIPLAYER</div><h1>Battle <span style="color:#aaa">Mode</span></h1><p>Deux joueurs, deux appareils, les mêmes extraits. Crée une salle et partage son code avec ton adversaire.</p>
-<section class="room-grid">
- <div class="panel room"><div class="icon" style="margin:0 auto 18px">＋</div><h2>Créer une salle</h2><p>Tu héberges la partie. Un code sera généré pour ton ami.</p><button class="btn" id="create">Créer une salle</button><div id="created" hidden><div class="code" id="roomCode">BLF42</div><p>Partage ce code avec ton adversaire.</p><div class="pill" id="roomStatus">En attente du deuxième joueur…</div><div style="margin-top:15px"><button class="btn secondary" id="simulate">Simuler l’arrivée du joueur (démo)</button></div></div></div>
- <div class="panel room"><div class="icon" style="margin:0 auto 18px">↗</div><h2>Rejoindre une salle</h2><p>Entre le code communiqué par ton ami pour rejoindre son match.</p><input class="input" id="joinCode" maxlength="5" placeholder="CODE DE LA SALLE" style="text-align:center;text-transform:uppercase;letter-spacing:4px;max-width:260px;margin:8px auto 14px"><br><button class="btn secondary" id="join">Rejoindre la salle</button><p id="joinStatus" class="muted" style="margin-top:14px"></p></div>
-</section>
-<div class="section"><h2>Règles du match</h2></div>
-<section class="grid">
- <div class="panel"><div class="eyebrow">JOUEURS</div><h2>2</h2><p>Un joueur par appareil, dans la même salle.</p></div>
- <div class="panel"><div class="eyebrow">DURÉE</div><h2>10 manches</h2><p>15 secondes pour répondre à chaque extrait.</p></div>
- <div class="panel"><div class="eyebrow">RÉPONSES</div><h2>Titre + artiste</h2><p>Chaque joueur répond de son côté. Le premier à trouver ne bloque pas l’autre.</p></div>
-</section>
-<div class="panel" style="margin-top:18px"><h3>Déroulement d’une manche</h3><p>Les deux joueurs entendent le même extrait au même moment. Si l’un trouve la réponse, l’autre peut continuer jusqu’à sa réponse ou la fin du chrono. La bonne réponse et les points des deux joueurs sont ensuite affichés.</p></div>
-<div class="panel" style="margin-top:18px"><b>À savoir :</b><p style="margin:8px 0 0">Cette interface est une maquette. Pour jouer réellement depuis deux appareils, il faudra connecter un serveur (par exemple Supabase Realtime) et une source audio autorisée. Les boutons de salle ci-dessus simulent uniquement le parcours.</p></div>
-<footer>BLINDIFY · Battle mode · Prototype multijoueur</footer>
 
+<!-- LOBBY -->
+<div id="lobby">
+ <section class="room-grid">
+  <div class="panel room">
+   <div class="icon" style="margin:0 auto 18px">＋</div>
+   <h2>Créer une salle</h2>
+   <p>Tu héberges la partie. Un code sera généré pour ton ami.</p>
+   <button class="btn" id="create">Créer une salle</button>
+   <div id="created" hidden>
+    <div class="code" id="roomCode">-----</div>
+    <p>Partage ce code avec ton adversaire.</p>
+    <div class="pill" id="roomStatus">En attente du deuxième joueur…</div>
+   </div>
+  </div>
+  <div class="panel room">
+   <div class="icon" style="margin:0 auto 18px">↗</div>
+   <h2>Rejoindre une salle</h2>
+   <p>Entre le code communiqué par ton ami pour rejoindre son match.</p>
+   <input class="input" id="joinCode" maxlength="5" placeholder="CODE DE LA SALLE" style="text-align:center;text-transform:uppercase;letter-spacing:4px;max-width:260px;margin:8px auto 14px"><br>
+   <button class="btn secondary" id="join">Rejoindre la salle</button>
+   <p id="joinStatus" class="muted" style="margin-top:14px"></p>
+  </div>
+ </section>
+
+ <div class="section"><h2>Règles du match</h2></div>
+ <section class="grid">
+  <div class="panel"><div class="eyebrow">JOUEURS</div><h2>2</h2><p>Un joueur par appareil, dans la même salle.</p></div>
+  <div class="panel"><div class="eyebrow">DURÉE</div><h2>10 manches</h2><p>15 secondes pour répondre à chaque extrait.</p></div>
+  <div class="panel"><div class="eyebrow">RÉPONSES</div><h2>Titre + artiste</h2><p>Chaque joueur répond de son côté. Le premier à trouver ne bloque pas l’autre.</p></div>
+ </section>
 </div>
+
+<!-- ARÈNE DE JEU EN LIGNE -->
+<div id="arena" hidden>
+ <div class="row" style="justify-content:space-between;margin-bottom:14px">
+  <div><div class="eyebrow">SALLE <span id="activeRoom">-----</span> · TU ES LE JOUEUR <span id="myNum">1</span></div><h2>Manche <span id="roundNum">0</span> / <span id="maxRounds">10</span></h2></div>
+  <h2 id="battleTimer">00:15</h2>
+ </div>
+
+ <div class="game-layout">
+  <div class="panel">
+   <div id="readyBox" style="text-align:center;padding:24px 0">
+    <h3>Adversaire connecté !</h3>
+    <p>Les deux appareils sont synchronisés.</p>
+    <button class="btn" id="startMatch">Lancer la 1ère manche →</button>
+   </div>
+
+   <div id="playBox" hidden>
+    <div class="audio">
+     <button class="play" id="battlePlay">⏸</button>
+     <div class="wave">▂ ▅ ▃ ▇ ▄ ▆ ▂ ▅ ▇ ▃</div>
+     <div class="muted" id="battleAudioStatus">EXTRAIT EN COURS...</div>
+     <audio id="battleAudio"></audio>
+    </div>
+
+    <label for="battleGuess">Écris le titre OU le nom de l’artiste</label>
+    <input class="input" id="battleGuess" placeholder="Ta réponse..." autocomplete="off" style="margin-top:8px">
+    <div class="badges">
+     <span class="badge" id="bArtist">Artiste : ?</span>
+     <span class="badge" id="bTitle">Titre : ?</span>
+    </div>
+    <div class="row" style="margin-top:14px">
+     <button class="btn" id="battleSubmit">Valider</button>
+    </div>
+    <div class="feedback" id="battleFeedback"></div>
+   </div>
+
+   <div id="roundReveal" hidden style="text-align:center;padding:24px 0">
+    <div class="eyebrow">FIN DE LA MANCHE</div>
+    <h2 id="revTitle">Titre</h2>
+    <p id="revArtist">Artiste</p>
+    <button class="btn" id="nextRoundBtn">Manche suivante →</button>
+   </div>
+
+   <div id="matchEnd" hidden style="text-align:center;padding:24px 0">
+    <div class="eyebrow">MATCH TERMINÉ</div>
+    <h1 id="winnerHeadline">Victoire !</h1>
+    <p id="finalScoresText"></p>
+    <a class="btn" href="/battle">Nouveau match</a>
+   </div>
+  </div>
+
+  <aside class="panel stats">
+   <h3>Scores en direct</h3>
+   <div><span>Joueur 1 <b id="tag1"></b></span><b id="score1">0 pts</b></div>
+   <div><span>Joueur 2 <b id="tag2"></b></span><b id="score2">0 pts</b></div>
+   <div><span>Statut adversaire</span><b id="oppStatus">En recherche…</b></div>
+  </aside>
+ </div>
+</div>
+
+<footer>BLINDIFY · Battle mode multijoueur</footer>
+</div>
+
 <script>
-const $=id=>document.getElementById(id);
-$("create").onclick=()=>{$("created").hidden=false;$("roomCode").textContent=Math.random().toString(36).slice(2,7).toUpperCase();$("roomStatus").textContent="En attente du deuxième joueur…"};
-$("simulate").onclick=()=>{$("roomStatus").textContent="Adversaire connecté — prêt à jouer !"};
-$("join").onclick=()=>{let code=$("joinCode").value.trim().toUpperCase();if(code.length<4){$("joinStatus").textContent="Entre un code valide (au moins 4 caractères).";return}$("joinStatus").textContent="Code "+code+" accepté en mode démonstration. La connexion réelle nécessite un serveur."};
+const socket = io();
+const $ = id => document.getElementById(id);
+const audio = $("battleAudio");
+
+let room = null, myNum = null, timeLeft = 15, clock = null, isHost = false;
+
+$("create").onclick = () => {
+  isHost = true;
+  socket.emit("create_room");
+};
+
+$("join").onclick = () => {
+  const code = $("joinCode").value.trim().toUpperCase();
+  if (code.length < 5) {
+    $("joinStatus").textContent = "Entre un code valide à 5 caractères.";
+    return;
+  }
+  socket.emit("join_room", { room: code });
+};
+
+socket.on("room_created", data => {
+  room = data.room;
+  myNum = data.playerNum;
+  $("create").hidden = true;
+  $("created").hidden = false;
+  $("roomCode").textContent = room;
+});
+
+socket.on("player_joined", data => {
+  room = data.room;
+  myNum = data.playerNum;
+});
+
+socket.on("battle_error", data => {
+  $("joinStatus").textContent = data.message;
+  alert(data.message);
+});
+
+socket.on("match_ready", data => {
+  room = data.room;
+  $("lobby").hidden = true;
+  $("arena").hidden = false;
+  $("activeRoom").textContent = room;
+  $("myNum").textContent = myNum;
+  $("tag" + myNum).textContent = "(Toi)";
+  if (!isHost) {
+    $("startMatch").textContent = "En attente du lancement par l'hôte...";
+    $("startMatch").disabled = true;
+  }
+});
+
+$("startMatch").onclick = () => {
+  socket.emit("start_match", { room });
+};
+
+socket.on("new_round", data => {
+  clearInterval(clock);
+  $("readyBox").hidden = true;
+  $("roundReveal").hidden = true;
+  $("playBox").hidden = false;
+
+  $("roundNum").textContent = data.round;
+  $("maxRounds").textContent = data.maxRounds;
+  $("oppStatus").textContent = "En train d'écrire…";
+
+  $("battleGuess").value = "";
+  $("battleGuess").disabled = false;
+  $("battleSubmit").disabled = false;
+  $("battleFeedback").style.display = "none";
+  $("bArtist").className = "badge";
+  $("bArtist").textContent = "Artiste : ?";
+  $("bTitle").className = "badge";
+  $("bTitle").textContent = "Titre : ?";
+
+  audio.src = data.url;
+  audio.onloadedmetadata = () => {
+    if (audio.duration && isFinite(audio.duration)) {
+      audio.currentTime = audio.duration * data.startRatio;
+    }
+    audio.play().then(() => {
+      $("battlePlay").textContent = "⏸";
+      $("battleAudioStatus").textContent = "EXTRAIT EN COURS...";
+    }).catch(() => {
+      $("battlePlay").textContent = "▶";
+      $("battleAudioStatus").textContent = "CLIQUE SUR ▶ POUR ÉCOUTER";
+    });
+  };
+
+  timeLeft = 15;
+  $("battleTimer").textContent = "00:15";
+  clock = setInterval(() => {
+    timeLeft--;
+    $("battleTimer").textContent = "00:" + String(Math.max(0, timeLeft)).padStart(2, "0");
+    if (timeLeft <= 0) {
+      clearInterval(clock);
+      if (isHost) socket.emit("round_timeout", { room });
+    }
+  }, 1000);
+  $("battleGuess").focus();
+});
+
+function sendGuess() {
+  const guess = $("battleGuess").value.trim();
+  if (!guess) return;
+  socket.emit("battle_guess", { room, guess, timeLeft });
+  $("battleGuess").value = "";
+}
+
+$("battleSubmit").onclick = sendGuess;
+$("battleGuess").addEventListener("keydown", e => { if (e.key === "Enter") sendGuess(); });
+
+socket.on("guess_result", data => {
+  const fb = $("battleFeedback");
+  fb.style.display = "block";
+  if (data.correct) {
+    fb.style.borderColor = "#2ecc71";
+    if (data.foundArtist) {
+      $("bArtist").className = "badge ok";
+      $("bArtist").textContent = "Artiste : Validé";
+    }
+    if (data.foundTitle) {
+      $("bTitle").className = "badge ok";
+      $("bTitle").textContent = "Titre : Validé";
+    }
+    if (data.done) {
+      fb.textContent = `Complet (+${data.pts} pts) ! En attente de la fin du chrono ou de l'adversaire…`;
+      $("battleGuess").disabled = true;
+      $("battleSubmit").disabled = true;
+    } else {
+      fb.textContent = `Bien joué (+${data.pts} pts) ! Trouve maintenant ${data.foundTitle ? "l'artiste" : "le titre"}.`;
+    }
+  } else {
+    fb.style.borderColor = "#e74c3c";
+    fb.textContent = "Pas tout à fait, réessaie !";
+  }
+});
+
+socket.on("scores_updated", data => {
+  $("score1").textContent = (data.scores[1] || 0) + " pts";
+  $("score2").textContent = (data.scores[2] || 0) + " pts";
+  if (data.playerNum !== myNum && data.playerDone) {
+    $("oppStatus").textContent = "A tout trouvé !";
+  }
+});
+
+socket.on("round_ended", data => {
+  clearInterval(clock);
+  audio.pause();
+  $("score1").textContent = (data.scores[1] || 0) + " pts";
+  $("score2").textContent = (data.scores[2] || 0) + " pts";
+  $("playBox").hidden = true;
+  $("roundReveal").hidden = false;
+  $("revTitle").textContent = data.title;
+  $("revArtist").textContent = data.artist;
+});
+
+$("nextRoundBtn").onclick = () => {
+  socket.emit("next_round", { room });
+};
+
+socket.on("match_finished", data => {
+  clearInterval(clock);
+  audio.pause();
+  $("playBox").hidden = true;
+  $("roundReveal").hidden = true;
+  $("matchEnd").hidden = false;
+
+  const s1 = data.scores[1] || 0;
+  const s2 = data.scores[2] || 0;
+  const myScore = myNum === 1 ? s1 : s2;
+  const oppScore = myNum === 1 ? s2 : s1;
+
+  if (myScore > oppScore) $("winnerHeadline").textContent = "🏆 Victoire !";
+  else if (myScore < oppScore) $("winnerHeadline").textContent = "Défaite…";
+  else $("winnerHeadline").textContent = "🤝 Égalité !";
+
+  $("finalScoresText").textContent = `Joueur 1 : ${s1} pts  ·  Joueur 2 : ${s2} pts`;
+});
+
+$("battlePlay").onclick = () => {
+  if (audio.paused) { audio.play(); $("battlePlay").textContent = "⏸"; }
+  else { audio.pause(); $("battlePlay").textContent = "▶"; }
+};
 </script>
 </body></html>

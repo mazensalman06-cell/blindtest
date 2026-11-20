@@ -1,4 +1,4 @@
 Flask
-gunicorn
 Flask-SocketIO
 eventlet
+simple-websocket
