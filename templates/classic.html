@@ -9,24 +9,30 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:poi
 .eyebrow{font-size:11px;letter-spacing:2px;color:#aaa;font-weight:800;margin-bottom:16px}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(34px,6vw,58px)/1.04 'Space Grotesk';letter-spacing:-2px;margin-bottom:16px}h2{font:700 25px 'Space Grotesk'}h3{font:700 17px 'Space Grotesk'}p{color:var(--muted);line-height:1.65}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}.btn.secondary.selected{border-color:#f5f5f5;background:#3a3a3a}
 .panel{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}
-.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.playlist{padding:17px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer}.playlist:hover,.playlist.selected{border-color:#aaa;background:#242424}.playlist .emoji{font-size:27px;margin-bottom:12px}.playlist p{font-size:11px;margin:5px 0 0}
+.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.playlist{padding:22px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer;transition:.2s}.playlist:hover,.playlist.selected{border-color:#f5f5f5;background:#242424}.playlist .emoji{font-size:28px;margin-bottom:12px}.playlist p{font-size:12px;margin:6px 0 0}
 .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.input{width:100%;background:#101010;border:1px solid #393939;border-radius:12px;color:white;padding:15px;outline:none;margin-top:8px}.input:focus{border-color:#aaa}.muted{color:var(--muted);font-size:12px}.game-layout{display:grid;grid-template-columns:1fr 260px;gap:17px}.audio{min-height:205px;border:1px solid #454545;border-radius:17px;background:radial-gradient(ellipse,#343434,#1a1a1a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:20px 0}.play{width:58px;height:58px;border-radius:50%;background:#f1f1f1;color:#111;font-size:20px}.wave{letter-spacing:5px;color:#ddd;margin:15px 0 7px}.stats div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}.feedback{padding:12px;border:1px solid #555;border-radius:11px;margin-top:12px;display:none;font-size:13px}
 .badges{display:flex;gap:8px;margin-top:12px}.badge{padding:6px 12px;border-radius:20px;font-size:12px;background:#222;border:1px solid #3a3a3a;color:#888}.badge.ok{background:#1b3322;border-color:#2ecc71;color:#2ecc71;font-weight:700}
 footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#777;font-size:11px}
-@media(max-width:760px){.playlist-grid{grid-template-columns:repeat(2,1fr)}.game-layout{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
+@media(max-width:760px){.playlist-grid,.game-layout{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
 </style></head><body>
 <div class="wrap">
 
 <header class="top"><a class="brand" href="/">♫ blind<span>ify</span></a><nav class="nav"><a href="/">← Accueil</a><a href="/battle">Battle mode</a><span class="pill">✦ <b id="totalXp">{{ exp }}</b> XP</span></nav></header>
-<div class="eyebrow" id="topEyebrow">MODE SOLO</div><h1>Classic <span style="color:#aaa">Mode</span></h1><p>Choisis ta playlist et ta difficulté. Une seule case pour proposer le titre ou l’artiste, dans l’ordre que tu veux (les petites fautes d'orthographe sont acceptées).</p>
+<div class="eyebrow" id="topEyebrow">MODE SOLO</div><h1>Classic <span style="color:#aaa">Mode</span></h1><p>Choisis ta playlist et ta difficulté. Une seule case pour proposer le titre ou l’artiste, dans l’ordre que tu veux.</p>
 
 <section id="setup">
  <div class="section"><h2>1. Choisis une playlist</h2></div>
  <div class="playlist-grid" id="playlists">
-  <div class="playlist selected" data-name="Mix Complet (200+ titres)"><div class="emoji">🔥</div><b>Mix Complet</b><p>Toute ta bibliothèque</p></div>
-  <div class="playlist" data-name="Rap & Hip-hop"><div class="emoji">🎤</div><b>Rap & Hip-hop</b><p>Classiques et nouveautés</p></div>
-  <div class="playlist" data-name="Afrobeats"><div class="emoji">🌍</div><b>Afrobeats</b><p>Les sons qui font danser</p></div>
-  <div class="playlist" data-name="Pop Hits"><div class="emoji">🎧</div><b>Pop Hits</b><p>Les tubes internationaux</p></div>
+  <div class="playlist selected" data-playlist="playlist1" data-name="M4">
+   <div class="emoji">🔥</div>
+   <b>M4</b>
+   <p>Playlist M4 ({{ count1 }} titres)</p>
+  </div>
+  <div class="playlist" data-playlist="playlist2" data-name="H">
+   <div class="emoji">🎧</div>
+   <b>H</b>
+   <p>Playlist H ({{ count2 }} titres)</p>
+  </div>
  </div>
  <div class="section"><h2>2. Difficulté</h2></div>
  <div class="row" id="difficulty">
@@ -54,7 +60,7 @@ footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#
   </div>
   <div class="row" style="margin-top:14px"><button class="btn" id="validate">Valider ma réponse</button><button class="btn secondary" id="skip">I DON'T KNOW</button></div>
   <div class="feedback" id="feedback"></div>
- </div><aside class="panel stats"><h3>Ta progression</h3><div><span>XP de la partie</span><b id="xp">0</b></div><div><span>Chansons complétées</span><b id="correct">0 / 10</b></div><div><span>Playlist</span><b id="chosen">Mix Complet</b></div><div><span>Streak</span><b id="streak">0</b></div></aside></div>
+ </div><aside class="panel stats"><h3>Ta progression</h3><div><span>XP de la partie</span><b id="xp">0</b></div><div><span>Chansons complétées</span><b id="correct">0 / 10</b></div><div><span>Playlist</span><b id="chosen">M4</b></div><div><span>Streak</span><b id="streak">0</b></div></aside></div>
 </section>
 
 <section id="reveal" class="panel" hidden style="margin-top:20px;text-align:center"><div class="eyebrow">RÉPONSE</div><h2 id="answerTitle">Titre</h2><p id="answerArtist">Artiste</p><p class="muted" id="revealNote">Aucun XP attribué pour une chanson passée.</p><button class="btn" id="next">Chanson suivante →</button></section>
@@ -65,23 +71,33 @@ footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#
 </div>
 
 <script>
-const isSpeed = new URLSearchParams(location.search).get("mode") === "speed";
+const params = new URLSearchParams(location.search);
+const isSpeed = params.get("mode") === "speed";
 if (isSpeed) {
   document.getElementById("topEyebrow").textContent = "SPEED CHALLENGE";
   document.querySelector("h1").innerHTML = 'Speed <span style="color:#aaa">Challenge</span>';
 }
 
-let questions = [], playlist = "Mix Complet (200+ titres)", level = "Easy", i = 0, xp = 0, done = 0, streak = 0;
+let questions = [], playlistKey = "playlist1", playlistName = "M4", level = "Easy", i = 0, xp = 0, done = 0, streak = 0;
 let foundTitle = false, foundArtist = false, time = 20, maxTime = 20, clock = null, checking = false;
 
 const $ = id => document.getElementById(id);
 const audio = $("audioPlayer");
 
-document.querySelectorAll(".playlist").forEach(el => el.addEventListener("click", () => {
+function selectPlaylistCard(el) {
   document.querySelectorAll(".playlist").forEach(x => x.classList.remove("selected"));
   el.classList.add("selected");
-  playlist = el.dataset.name;
-}));
+  playlistKey = el.dataset.playlist;
+  playlistName = el.dataset.name;
+}
+
+document.querySelectorAll(".playlist").forEach(el => el.addEventListener("click", () => selectPlaylistCard(el)));
+
+const preselected = params.get("playlist");
+if (preselected) {
+  const targetCard = document.querySelector(`.playlist[data-playlist="${preselected}"]`);
+  if (targetCard) selectPlaylistCard(targetCard);
+}
 
 document.querySelectorAll("#difficulty button").forEach(el => el.addEventListener("click", () => {
   document.querySelectorAll("#difficulty button").forEach(x => x.classList.remove("selected"));
@@ -92,7 +108,11 @@ document.querySelectorAll("#difficulty button").forEach(el => el.addEventListene
 async function start() {
   $("start").disabled = true;
   $("start").textContent = "Chargement...";
-  const res = await fetch("/api/classic/start", { method: "POST" });
+  const res = await fetch("/api/classic/start", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ playlist: playlistKey })
+  });
   const data = await res.json();
   if (data.error) {
     alert(data.error);
@@ -105,7 +125,7 @@ async function start() {
   maxTime = isSpeed ? 12 : (level === "Easy" ? 25 : level === "Medium" ? 20 : 15);
   $("setup").hidden = true;
   $("game").hidden = false;
-  $("chosen").textContent = playlist;
+  $("chosen").textContent = playlistName;
   $("modeLabel").textContent = (isSpeed ? "SPEED CHALLENGE · " : "") + level.toUpperCase();
   load();
 }
@@ -246,7 +266,7 @@ async function finish() {
   $("game").hidden = true;
   $("results").hidden = false;
   $("finalXp").textContent = "+" + xp + " XP";
-  $("finalText").textContent = `${done} chansons complétées sur ${questions.length} · ${playlist}`;
+  $("finalText").textContent = `${done} chansons complétées sur ${questions.length} · Playlist ${playlistName}`;
 
   const res = await fetch("/api/xp/add", {
     method: "POST",

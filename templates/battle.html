@@ -7,7 +7,7 @@
 a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0}
 .wrap{max-width:1120px;margin:auto;padding:28px 24px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px}.brand{font:700 25px 'Space Grotesk';letter-spacing:-1px}.brand span{color:#999}.nav{display:flex;gap:10px;align-items:center}.nav a,.pill{padding:10px 14px;border:1px solid var(--line);border-radius:30px;color:#ddd;font-size:13px}
 .eyebrow{font-size:11px;letter-spacing:2px;color:#aaa;font-weight:800;margin-bottom:16px}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(34px,6vw,58px)/1.04 'Space Grotesk';letter-spacing:-2px;margin-bottom:16px}h2{font:700 25px 'Space Grotesk'}h3{font:700 17px 'Space Grotesk'}p{color:var(--muted);line-height:1.65}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}.btn.secondary.selected{border-color:#f5f5f5;background:#3a3a3a}
 .panel{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.icon{width:46px;height:46px;border-radius:13px;background:#292929;display:grid;place-items:center;font-size:22px;margin-bottom:20px}
 .section{margin:30px 0 18px}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.input{width:100%;background:#101010;border:1px solid #393939;border-radius:12px;color:white;padding:15px;outline:none}.input:focus{border-color:#aaa}.muted{color:var(--muted);font-size:12px}
 .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.room{text-align:center;padding:28px}.code{font:700 34px 'Space Grotesk';letter-spacing:8px;padding:18px;margin:15px auto;background:#242424;border:1px dashed #777;border-radius:13px;max-width:280px}
@@ -21,7 +21,7 @@ footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#
 <div class="wrap">
 
 <header class="top"><a class="brand" href="/">♫ blind<span>ify</span></a><nav class="nav"><a href="/">← Accueil</a><a href="/classic">Mode solo</a><span class="pill">⚔ Battle mode</span></nav></header>
-<div class="eyebrow">REAL-TIME MULTIPLAYER</div><h1>Battle <span style="color:#aaa">Mode</span></h1><p>Deux joueurs, deux appareils, les mêmes extraits. Crée une salle et partage son code avec ton adversaire.</p>
+<div class="eyebrow">REAL-TIME MULTIPLAYER</div><h1>Battle <span style="color:#aaa">Mode</span></h1><p>Deux joueurs, deux appareils, les mêmes extraits. Choisis entre M4 et H, crée une salle et partage son code avec ton adversaire.</p>
 
 <!-- LOBBY -->
 <div id="lobby">
@@ -29,7 +29,11 @@ footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#
   <div class="panel room">
    <div class="icon" style="margin:0 auto 18px">＋</div>
    <h2>Créer une salle</h2>
-   <p>Tu héberges la partie. Un code sera généré pour ton ami.</p>
+   <p>Choisis la playlist du match puis génère un code pour ton ami.</p>
+   <div class="row" id="battlePlaylistSelect" style="justify-content:center;margin:14px 0 18px">
+    <button class="btn secondary selected" data-playlist="playlist1">🔥 M4 ({{ count1 }})</button>
+    <button class="btn secondary" data-playlist="playlist2">🎧 H ({{ count2 }})</button>
+   </div>
    <button class="btn" id="create">Créer une salle</button>
    <div id="created" hidden>
     <div class="code" id="roomCode">-----</div>
@@ -58,7 +62,7 @@ footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#
 <!-- ARÈNE DE JEU EN LIGNE -->
 <div id="arena" hidden>
  <div class="row" style="justify-content:space-between;margin-bottom:14px">
-  <div><div class="eyebrow">SALLE <span id="activeRoom">-----</span> · TU ES LE JOUEUR <span id="myNum">1</span></div><h2>Manche <span id="roundNum">0</span> / <span id="maxRounds">10</span></h2></div>
+  <div><div class="eyebrow">SALLE <span id="activeRoom">-----</span> · PLAYLIST <span id="activePlaylistLabel">M4</span> · JOUEUR <span id="myNum">1</span></div><h2>Manche <span id="roundNum">0</span> / <span id="maxRounds">10</span></h2></div>
   <h2 id="battleTimer">00:15</h2>
  </div>
 
@@ -122,11 +126,19 @@ const socket = io();
 const $ = id => document.getElementById(id);
 const audio = $("battleAudio");
 
-let room = null, myNum = null, timeLeft = 15, clock = null, isHost = false;
+let room = null, myNum = null, timeLeft = 15, clock = null, isHost = false, chosenPlaylist = "playlist1";
+
+document.querySelectorAll("#battlePlaylistSelect button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#battlePlaylistSelect button").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    chosenPlaylist = btn.dataset.playlist;
+  });
+});
 
 $("create").onclick = () => {
   isHost = true;
-  socket.emit("create_room");
+  socket.emit("create_room", { playlist: chosenPlaylist });
 };
 
 $("join").onclick = () => {
@@ -142,6 +154,7 @@ socket.on("room_created", data => {
   room = data.room;
   myNum = data.playerNum;
   $("create").hidden = true;
+  $("battlePlaylistSelect").style.display = "none";
   $("created").hidden = false;
   $("roomCode").textContent = room;
 });
@@ -161,6 +174,7 @@ socket.on("match_ready", data => {
   $("lobby").hidden = true;
   $("arena").hidden = false;
   $("activeRoom").textContent = room;
+  $("activePlaylistLabel").textContent = data.playlistName || (data.playlist === "playlist2" ? "H" : "M4");
   $("myNum").textContent = myNum;
   $("tag" + myNum).textContent = "(Toi)";
   if (!isHost) {

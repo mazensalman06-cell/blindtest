@@ -10,32 +10,30 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:poi
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 19px;border-radius:12px;font-size:13px;font-weight:800;background:#f2f2f2;color:#111;transition:.2s}.btn:hover{transform:translateY(-2px);background:#ddd}.btn.secondary{background:#292929;border:1px solid #414141;color:#f5f5f5}
 .panel,.card{background:linear-gradient(145deg,#1b1b1b,#141414);border:1px solid var(--line);border-radius:18px;padding:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{min-height:190px;display:flex;flex-direction:column;align-items:flex-start;transition:.2s}.card:hover{border-color:#777;transform:translateY(-3px)}.icon{width:46px;height:46px;border-radius:13px;background:#292929;display:grid;place-items:center;font-size:22px;margin-bottom:20px}.card p{font-size:13px;margin-bottom:0}.arrow{margin-top:auto;padding-top:16px;color:#ddd}
 .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-bottom:58px}.hero-copy{padding:25px 0}.hero-art{min-height:280px;border:1px solid #3a3a3a;border-radius:24px;background:radial-gradient(circle,#393939,#171717 68%);display:grid;place-items:center;position:relative;overflow:hidden}.disc{width:175px;height:175px;border-radius:50%;background:repeating-radial-gradient(circle,#171717 0 3px,#3b3b3b 4px 5px);border:7px solid #111;display:grid;place-items:center;animation:spin 14s linear infinite}.disc span{width:55px;height:55px;border-radius:50%;background:#eee;color:#111;display:grid;place-items:center;font-size:22px}@keyframes spin{to{transform:rotate(360deg)}}.float{position:absolute;background:#191919;border:1px solid #454545;border-radius:12px;padding:10px 13px;font-size:11px;font-weight:800}.float.one{top:22px;left:22px}.float.two{right:20px;bottom:24px}
-.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.playlist{padding:17px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer;display:block}.playlist:hover{border-color:#aaa;background:#242424}.playlist .emoji{font-size:27px;margin-bottom:12px}.playlist p{font-size:11px;margin:5px 0 0}
+.section{margin:30px 0 18px}.playlist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.playlist{padding:22px;border:1px solid var(--line);border-radius:15px;background:#171717;cursor:pointer;display:block;transition:.2s}.playlist:hover{border-color:#aaa;background:#242424;transform:translateY(-2px)}.playlist .emoji{font-size:28px;margin-bottom:12px}.playlist p{font-size:12px;margin:6px 0 0}
 .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 footer{margin-top:55px;border-top:1px solid var(--line);padding-top:20px;color:#777;font-size:11px}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.playlist-grid{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.playlist-grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:18px;flex-direction:column}.wrap{padding:22px 16px 45px}}
 </style></head><body>
 <div class="wrap">
 
 <header class="top"><a class="brand" href="/">♫ blind<span>ify</span></a><nav class="nav"><a href="/classic">Mode solo</a><a href="/battle">Multijoueur</a><span class="pill">✦ {{ exp }} XP</span></nav></header>
 <section class="hero">
  <div class="hero-copy"><div class="eyebrow">YOUR MUSIC. YOUR CHALLENGE.</div><h1>Tu connais vraiment<br>ta musique&nbsp;?</h1>
- <p>Écoute un extrait, devine le titre ou l’artiste et gagne de l’expérience. Choisis ton mode et lance le défi.</p>
+ <p>Écoute un extrait, devine le titre ou l’artiste et gagne de l’expérience. Choisis ta playlist et lance le défi.</p>
  <div class="row"><a class="btn" href="/classic">Commencer à jouer →</a><a class="btn secondary" href="/battle">Défier un ami</a></div></div>
  <div class="hero-art"><div class="float one">♫ FEEL THE BEAT</div><div class="disc"><span>♫</span></div><div class="float two">+ XP À CHAQUE BONNE RÉPONSE</div></div>
 </section>
 <div class="section"><div class="eyebrow">CHOISIS TON EXPÉRIENCE</div><h2>Quel mode veux-tu jouer&nbsp;?</h2></div>
 <section class="grid">
- <a class="card" href="/classic"><div class="icon">♫</div><h3>Classic Mode</h3><p>Joue en solo, choisis une playlist et retrouve le titre et l’artiste.</p><span class="arrow">Jouer en solo →</span></a>
+ <a class="card" href="/classic"><div class="icon">♫</div><h3>Classic Mode</h3><p>Joue en solo, choisis entre M4 et H et retrouve le titre et l’artiste.</p><span class="arrow">Jouer en solo →</span></a>
  <a class="card" href="/classic?mode=speed"><div class="icon">◷</div><h3>Speed Challenge</h3><p>Réponds le plus vite possible pour maximiser tes points d’XP.</p><span class="arrow">Lancer le chrono →</span></a>
  <a class="card" href="/battle"><div class="icon">⚔</div><h3>Battle Mode</h3><p>Affronte un autre joueur sur deux appareils avec les mêmes extraits.</p><span class="arrow">Créer une partie →</span></a>
 </section>
-<div class="section"><h2>Des playlists à découvrir</h2><p>Des sélections prêtes à jouer : pas besoin de créer ta propre playlist.</p></div>
+<div class="section"><h2>Playlists disponibles</h2><p>Choisis directement l’une des deux sélections pour lancer une partie solo.</p></div>
 <section class="playlist-grid">
- <a class="playlist" href="/classic"><div class="emoji">🎤</div><b>Rap & Hip-hop</b><p>Classiques et nouveautés</p></a>
- <a class="playlist" href="/classic"><div class="emoji">💿</div><b>Années 2000</b><p>Les hits incontournables</p></a>
- <a class="playlist" href="/classic"><div class="emoji">🌍</div><b>Afrobeats</b><p>Les sons qui font danser</p></a>
- <a class="playlist" href="/classic"><div class="emoji">🎧</div><b>Pop Hits</b><p>Les tubes internationaux</p></a>
+ <a class="playlist" href="/classic?playlist=playlist1"><div class="emoji">🔥</div><b>M4</b><p>Playlist principale · {{ count1 }} titres disponibles</p></a>
+ <a class="playlist" href="/classic?playlist=playlist2"><div class="emoji">🎧</div><b>H</b><p>Deuxième sélection · {{ count2 }} titres disponibles</p></a>
 </section>
 <footer>BLINDIFY · Blind test musical</footer>
 
